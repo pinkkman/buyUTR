@@ -1,10 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 import { useState } from 'react';
+import { MessageCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
-export default function ContactSellerButton({ listingId, sellerId }: { listingId: string; sellerId?: string }) {
+export default function ContactSellerButton({ listingId }: { listingId: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -17,7 +18,14 @@ export default function ContactSellerButton({ listingId, sellerId }: { listingId
         body: JSON.stringify({ listingId }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed');
+
+      if (res.status === 401) {
+        toast.error('Log in to message sellers');
+        router.push('/login');
+        return;
+      }
+      if (!res.ok) throw new Error(data.error || 'Failed to start chat');
+
       router.push(`/dashboard/messages?c=${data._id}`);
     } catch (err: any) {
       toast.error(err.message);
@@ -27,8 +35,12 @@ export default function ContactSellerButton({ listingId, sellerId }: { listingId
   };
 
   return (
-    <button onClick={startChat} disabled={loading}
-      className="w-full bg-slate-900 text-white py-3 rounded-lg font-medium disabled:opacity-60">
+    <button
+      onClick={startChat}
+      disabled={loading}
+      className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 disabled:opacity-60"
+    >
+      <MessageCircle size={18} />
       {loading ? 'Opening chat…' : 'Contact Seller'}
     </button>
   );
