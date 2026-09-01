@@ -30,17 +30,17 @@ export default function UserMenu({ user }: { user: any }) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm"
+        className="w-9 h-9 rounded-full bg-accent/15 text-accent flex items-center justify-center font-bold text-sm"
       >
         {user?.name?.[0]?.toUpperCase() || 'U'}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg py-1 z-50">
+        <div className="absolute right-0 mt-2 w-44 bg-surface border border-border rounded-lg shadow-lg py-1 z-50">
           <Link
             href="/dashboard"
             onClick={() => setOpen(false)}
-            className="block px-4 py-2 text-sm hover:bg-slate-50"
+            className="block px-4 py-2 text-sm text-fg hover:bg-surface-elevated"
           >
             Dashboard
           </Link>
@@ -48,7 +48,7 @@ export default function UserMenu({ user }: { user: any }) {
           <Link
             href="/dashboard/profile"
             onClick={() => setOpen(false)}
-            className="block px-4 py-2 text-sm hover:bg-slate-50"
+            className="hidden md:block px-4 py-2 text-sm text-fg hover:bg-surface-elevated"
           >
             Profile
           </Link>
@@ -57,7 +57,7 @@ export default function UserMenu({ user }: { user: any }) {
             <Link
               href="/admin"
               onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-sm hover:bg-slate-50"
+              className="block px-4 py-2 text-sm text-fg hover:bg-surface-elevated"
             >
               Admin
             </Link>
@@ -66,7 +66,7 @@ export default function UserMenu({ user }: { user: any }) {
           <form action={logoutAction}>
             <button
               type="submit"
-              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-slate-50"
+              className="w-full text-left px-4 py-2 text-sm text-accent hover:bg-surface-elevated"
             >
               Logout
             </button>

@@ -8,6 +8,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
   pages: { signIn: '/login' },
+  trustHost: true,
   providers: [
     Credentials({
       credentials: {

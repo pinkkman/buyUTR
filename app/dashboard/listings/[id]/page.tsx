@@ -11,11 +11,11 @@ interface Props {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  ACTIVE: 'bg-green-100 text-green-700',
-  SOLD: 'bg-blue-100 text-blue-700',
-  RESERVED: 'bg-amber-100 text-amber-700',
-  EXPIRED: 'bg-slate-100 text-slate-600',
-  REMOVED: 'bg-red-100 text-red-700',
+  ACTIVE: 'bg-green-500/15 text-green-400',
+  SOLD: 'bg-accent/15 text-accent',
+  RESERVED: 'bg-amber-500/15 text-amber-400',
+  EXPIRED: 'bg-surface-elevated text-fg-muted',
+  REMOVED: 'bg-accent/15 text-accent',
 };
 
 export default async function MyListingsPage({ searchParams }: Props) {
@@ -51,12 +51,12 @@ export default async function MyListingsPage({ searchParams }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">My Listings</h1>
-          <p className="text-sm text-slate-500">Manage everything you're selling.</p>
+          <h1 className="text-2xl font-bold text-fg">My Listings</h1>
+          <p className="text-sm text-fg-muted">Manage everything you're selling.</p>
         </div>
         <Link
           href="dashboard/listings/new"
-          className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+          className="inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-accent-secondary transition"
         >
           <Plus size={16} /> New Listing
         </Link>
@@ -78,8 +78,8 @@ export default async function MyListingsPage({ searchParams }: Props) {
             href={t.key === 'ALL' ? '/dashboard/listings' : `/dashboard/listings?status=${t.key}`}
             className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition ${
               (status || 'ALL') === t.key
-                ? 'bg-slate-900 text-white'
-                : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300'
+                ? 'bg-accent text-white'
+                : 'bg-surface border border-border text-fg-muted hover:border-accent'
             }`}
           >
             {t.label}
@@ -92,22 +92,22 @@ export default async function MyListingsPage({ searchParams }: Props) {
         {listings.map((l: any) => (
           <div
             key={l._id.toString()}
-            className="flex items-center gap-4 bg-white border border-slate-200 rounded-xl p-4 hover:shadow-md transition"
+            className="flex items-center gap-4 bg-surface border border-border rounded-xl p-4 hover:border-accent transition"
           >
-            <Link href={`/listings/${l._id}`} className="w-16 h-16 bg-slate-100 rounded-lg overflow-hidden shrink-0">
+            <Link href={`/listings/${l._id}`} className="w-16 h-16 bg-surface-elevated rounded-lg overflow-hidden shrink-0">
               {l.images?.[0] ? (
                 <img src={l.images[0]} className="w-full h-full object-cover" alt="" />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">No img</div>
+                <div className="w-full h-full flex items-center justify-center text-fg-muted text-xs">No img</div>
               )}
             </Link>
 
             <div className="flex-1 min-w-0">
-              <Link href={`/dashboard/listings/${l._id}`} className="font-medium truncate hover:underline block">
+              <Link href={`/dashboard/listings/${l._id}`} className="font-medium truncate hover:underline block text-fg">
                 {l.title}
               </Link>
-              <div className="flex items-center gap-3 text-sm text-slate-500 mt-0.5">
-                <span className="font-semibold text-slate-800">{formatPrice(l.price)}</span>
+              <div className="flex items-center gap-3 text-sm text-fg-muted mt-0.5">
+                <span className="font-semibold text-fg">{formatPrice(l.price)}</span>
                 <span className="inline-flex items-center gap-1"><Eye size={14} /> {l.views}</span>
               </div>
             </div>
@@ -121,9 +121,9 @@ export default async function MyListingsPage({ searchParams }: Props) {
         ))}
 
         {listings.length === 0 && (
-          <div className="text-center py-14 bg-white border border-dashed rounded-xl">
-            <p className="text-slate-500 font-medium">No listings here.</p>
-            <Link href="/dashboard/listings/new" className="inline-block mt-3 text-sm text-blue-600 hover:underline">
+          <div className="text-center py-14 bg-surface border border-dashed border-border rounded-xl">
+            <p className="text-fg-muted font-medium">No listings here.</p>
+            <Link href="/dashboard/listings/new" className="inline-block mt-3 text-sm text-accent hover:text-accent-secondary hover:underline">
               Create your first listing
             </Link>
           </div>
@@ -135,9 +135,9 @@ export default async function MyListingsPage({ searchParams }: Props) {
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4">
-      <p className="text-xs text-slate-500">{label}</p>
-      <p className="text-2xl font-bold mt-0.5">{value}</p>
+    <div className="bg-surface border border-border rounded-xl p-4">
+      <p className="text-xs text-fg-muted">{label}</p>
+      <p className="text-2xl font-bold mt-0.5 text-fg">{value}</p>
     </div>
   );
 }

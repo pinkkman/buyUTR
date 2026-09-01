@@ -23,13 +23,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Welcome, {session!.user.name}</h1>
+      <h1 className="text-3xl font-bold text-fg">Welcome, {session!.user.name}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {stats.map((s) => (
           <Link key={s.label} href={s.href}
-            className="bg-white border rounded-xl p-6 hover:shadow-md transition">
-            <p className="text-sm text-slate-500">{s.label}</p>
-            <p className="text-3xl font-bold mt-1">{s.value}</p>
+            className="bg-surface border border-border rounded-xl p-6 hover:border-accent transition">
+            <p className="text-sm text-fg-muted">{s.label}</p>
+            <p className="text-3xl font-bold mt-1 text-fg">{s.value}</p>
           </Link>
         ))}
       </div>

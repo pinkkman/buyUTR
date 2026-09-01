@@ -45,7 +45,7 @@ export default function ListingRowActions({ id, status }: Props) {
           disabled={busy}
           onClick={() => update('PATCH', { status: 'SOLD' })}
           title="Mark as sold"
-          className="p-2 rounded-lg text-slate-500 hover:bg-green-50 hover:text-green-600 disabled:opacity-50"
+          className="p-2 rounded-lg text-fg-muted hover:bg-surface-elevated hover:text-green-500 disabled:opacity-50 transition"
         >
           <CheckCircle size={17} />
         </button>
@@ -55,7 +55,7 @@ export default function ListingRowActions({ id, status }: Props) {
             disabled={busy}
             onClick={() => update('PATCH', { status: 'ACTIVE' })}
             title="Reactivate"
-            className="p-2 rounded-lg text-slate-500 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50"
+            className="p-2 rounded-lg text-fg-muted hover:bg-surface-elevated hover:text-accent disabled:opacity-50 transition"
           >
             <RotateCcw size={17} />
           </button>
@@ -66,7 +66,7 @@ export default function ListingRowActions({ id, status }: Props) {
         disabled={busy}
         onClick={remove}
         title="Remove listing"
-        className="p-2 rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 disabled:opacity-50"
+        className="p-2 rounded-lg text-fg-muted hover:bg-surface-elevated hover:text-accent disabled:opacity-50 transition"
       >
         <Trash2 size={17} />
       </button>

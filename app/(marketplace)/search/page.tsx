@@ -49,7 +49,7 @@ export default async function SearchPage({ searchParams }: Props) {
         current={params}
       />
       <div className="space-y-5">
-        <h1 className="text-xl font-bold">
+        <h1 className="text-xl font-bold text-fg">
           {params.q ? `Results for "${params.q}"` : 'All Listings'}
         </h1>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -58,7 +58,7 @@ export default async function SearchPage({ searchParams }: Props) {
           ))}
         </div>
         {listings.length === 0 && (
-          <p className="text-center text-slate-500 py-12">No listings found.</p>
+          <p className="text-center text-fg-muted py-12">No listings found.</p>
         )}
       </div>
     </div>

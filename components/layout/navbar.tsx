@@ -9,9 +9,11 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 gap-4">
-        <Link href="/" className="text-xl font-bold shrink-0">buyUTR</Link>
+        <Link href="/" className="text-xl font-bold shrink-0 text-fg">
+          buy<span className="text-accent">UTR</span>
+        </Link>
         <div className="hidden md:block flex-1 max-w-xl">
           <SearchBar />
         </div>
@@ -19,7 +21,7 @@ export default async function Navbar() {
           {session ? (
             <>
               <Link href="/dashboard/listings/new"
-                className="hidden sm:flex items-center gap-1.5 text-sm font-medium bg-slate-900 text-white px-4 py-2 rounded-lg">
+                className="hidden sm:flex items-center gap-1.5 text-sm font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-accent-secondary transition">
                 <PlusCircle size={16} /> Sell
               </Link>
               <NotificationsBell />
@@ -27,8 +29,8 @@ export default async function Navbar() {
             </>
           ) : (
             <>
-              <Link href="/login" className="text-sm font-medium text-slate-600">Log in</Link>
-              <Link href="/register" className="text-sm font-medium bg-slate-900 text-white px-4 py-2 rounded-lg">
+              <Link href="/login" className="text-sm font-medium text-fg-muted hover:text-fg transition">Log in</Link>
+              <Link href="/register" className="text-sm font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-accent-secondary transition">
                 Sign up
               </Link>
             </>

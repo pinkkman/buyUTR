@@ -30,10 +30,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
           {links.map((l, i) => (
             <div key={l.href}>
               {/* Subtle divider between Home and dashboard links */}
-              {i === 1 && <div className="my-2 border-t border-slate-200" />}
+              {i === 1 && <div className="my-2 border-t border-border" />}
               <Link
                 href={l.href}
-                className="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white transition"
+                className="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-fg-muted hover:bg-surface hover:text-fg transition"
               >
                 <l.icon size={18} />
                 {l.label}

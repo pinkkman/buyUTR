@@ -31,13 +31,13 @@ export default async function AdminPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <h1 className="text-3xl font-bold text-fg">Dashboard</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {stats.map((s) => (
-          <div key={s.label} className="bg-white border rounded-xl p-6">
-            <p className="text-sm text-slate-500">{s.label}</p>
-            <p className="text-3xl font-bold mt-1">{s.value}</p>
-            {s.sub && <p className="text-xs text-green-600 mt-1">{s.sub}</p>}
+          <div key={s.label} className="bg-surface border border-border rounded-xl p-6">
+            <p className="text-sm text-fg-muted">{s.label}</p>
+            <p className="text-3xl font-bold mt-1 text-fg">{s.value}</p>
+            {s.sub && <p className="text-xs text-green-500 mt-1">{s.sub}</p>}
           </div>
         ))}
       </div>

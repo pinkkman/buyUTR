@@ -17,13 +17,13 @@ export default async function FavoritesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Favorites</h1>
+      <h1 className="text-2xl font-bold text-fg">Favorites</h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {active.map((f) => (
           <ListingCard key={f._id.toString()} listing={f.listing} />
         ))}
       </div>
-      {active.length === 0 && <p className="text-slate-500 text-center py-10">No favorites yet.</p>}
+      {active.length === 0 && <p className="text-fg-muted text-center py-10">No favorites yet.</p>}
     </div>
   );
 }

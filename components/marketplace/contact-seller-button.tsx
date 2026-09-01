@@ -38,7 +38,7 @@ export default function ContactSellerButton({ listingId }: { listingId: string }
     <button
       onClick={startChat}
       disabled={loading}
-      className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 disabled:opacity-60"
+      className="w-full inline-flex items-center justify-center gap-2 bg-accent text-white py-3 rounded-xl font-semibold hover:bg-accent-secondary transition disabled:opacity-60"
     >
       <MessageCircle size={18} />
       {loading ? 'Opening chat…' : 'Contact Seller'}

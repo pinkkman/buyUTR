@@ -44,12 +44,12 @@ export default function ListingForm() {
   };
 
   return (
-    <form onSubmit={submit} className="bg-white border rounded-xl p-6 space-y-5">
+    <form onSubmit={submit} className="bg-surface border border-border rounded-xl p-6 space-y-5">
       <div>
-        <p className="font-medium mb-2">Photos (max 5)</p>
+        <p className="font-medium mb-2 text-fg">Photos (max 5)</p>
         <div className="grid grid-cols-5 gap-2">
           {previews.map((p, i) => (
-            <div key={i} className="relative aspect-square rounded-lg overflow-hidden border">
+            <div key={i} className="relative aspect-square rounded-lg overflow-hidden border border-border">
               <img src={p} className="w-full h-full object-cover" alt="" />
               <button type="button" onClick={() => removeImage(i)}
                 className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5">
@@ -58,7 +58,7 @@ export default function ListingForm() {
             </div>
           ))}
           {previews.length < 5 && (
-            <label className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer text-slate-400 hover:border-blue-400">
+            <label className="aspect-square border-2 border-dashed border-border rounded-lg flex items-center justify-center cursor-pointer text-fg-muted hover:border-accent transition">
               +
               <input type="file" accept="image/*" multiple onChange={handleImages} className="hidden" />
             </label>
@@ -67,39 +67,39 @@ export default function ListingForm() {
       </div>
 
       <input name="title" required minLength={5} maxLength={100} placeholder="Title"
-        className="w-full border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+        className="w-full border border-border bg-background text-fg placeholder:text-fg-muted rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-accent outline-none" />
 
       <textarea name="description" required minLength={20} rows={4} placeholder="Describe your item…"
-        className="w-full border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+        className="w-full border border-border bg-background text-fg placeholder:text-fg-muted rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-accent outline-none" />
 
       <div className="grid grid-cols-2 gap-3">
         <input name="price" type="number" min={0} required placeholder="Price (₹)"
-          className="border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
-        <select name="category" required className="border rounded-lg px-3 py-2.5 text-sm">
+          className="border border-border bg-background text-fg placeholder:text-fg-muted rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-accent outline-none" />
+        <select name="category" required className="border border-border bg-background text-fg rounded-lg px-3 py-2.5 text-sm">
           <option value="">Category</option>
           {CATEGORIES.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <select name="condition" required className="border rounded-lg px-3 py-2.5 text-sm">
+        <select name="condition" required className="border border-border bg-background text-fg rounded-lg px-3 py-2.5 text-sm">
           <option value="">Condition</option>
           {CONDITIONS.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-        <select name="location" required className="border rounded-lg px-3 py-2.5 text-sm">
+        <select name="location" required className="border border-border bg-background text-fg rounded-lg px-3 py-2.5 text-sm">
           <option value="">Location</option>
           {CAMPUS_LOCATIONS.map((l) => <option key={l} value={l}>{l}</option>)}
         </select>
       </div>
 
-      <div className="flex gap-5 text-sm">
-        <label className="flex items-center gap-2"><input type="checkbox" name="negotiable" value="true" /> Negotiable</label>
-        <label className="flex items-center gap-2"><input type="checkbox" name="exchangeAvailable" value="true" /> Exchange</label>
-        <label className="flex items-center gap-2"><input type="checkbox" name="rentalAvailable" value="true" /> Rental</label>
+      <div className="flex gap-5 text-sm text-fg-muted">
+        <label className="flex items-center gap-2"><input type="checkbox" name="negotiable" value="true" className="accent-accent" /> Negotiable</label>
+        <label className="flex items-center gap-2"><input type="checkbox" name="exchangeAvailable" value="true" className="accent-accent" /> Exchange</label>
+        <label className="flex items-center gap-2"><input type="checkbox" name="rentalAvailable" value="true" className="accent-accent" /> Rental</label>
       </div>
 
       <button disabled={loading}
-        className="w-full bg-slate-900 text-white py-3 rounded-lg font-medium disabled:opacity-60">
+        className="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent-secondary transition disabled:opacity-60">
         {loading ? 'Publishing…' : 'Publish Listing'}
       </button>
     </form>

@@ -29,8 +29,8 @@ export default function FavoriteButton({ listingId }: { listingId: string }) {
 
   return (
     <button onClick={toggle} disabled={loading}
-      className={`w-full border py-3 rounded-lg font-medium flex items-center justify-center gap-2 ${
-        favorited ? 'text-red-600 border-red-200' : ''
+      className={`w-full border py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition ${
+        favorited ? 'text-accent border-accent bg-accent/10' : 'text-fg border-border hover:border-accent'
       }`}>
       <Heart size={18} fill={favorited ? 'currentColor' : 'none'} />
       {favorited ? 'Saved' : 'Save'}
