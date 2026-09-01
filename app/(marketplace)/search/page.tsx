@@ -3,6 +3,7 @@ import Listing from '@/models/Listing';
 import ListingCard from '@/components/marketplace/listing-card';
 import SearchFilters from '@/components/marketplace/search-filters';
 import { CATEGORIES, CONDITIONS, CAMPUS_LOCATIONS } from '@/lib/constants';
+import { SortOrder } from 'mongoose';
 
 interface Props {
   searchParams: Promise<{
@@ -31,7 +32,7 @@ export default async function SearchPage({ searchParams }: Props) {
     if (params.maxPrice) (query.price as any).$lte = Number(params.maxPrice);
   }
 
-  const sort =
+  const sort :Record<string,SortOrder> =
     params.sort === 'price_asc'
       ? { price: 1 }
       : params.sort === 'price_desc'
