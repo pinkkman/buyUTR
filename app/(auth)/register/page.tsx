@@ -36,7 +36,14 @@ const [idCard,setIdCard]= useState<File | null>(null);
               className="border border-border bg-background text-fg placeholder:text-fg-muted rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-accent outline-none" />
           </div>
           {state?.error && <p className="text-sm text-accent">{state.error}</p>}
-          <button disabled={pending}
+          <button disabled={pending }
+ onClick={async () => {
+            if (idCard) {
+              const form = new FormData();
+              form.append('idCard', idCard);
+              await fetch('/api/verify-id/upload', { method: 'POST', body: form }).catch(() => {});
+            }
+          }}
             className="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent-secondary transition disabled:opacity-60">
             {pending ? 'Creating account…' : 'Sign up'}
           </button>
