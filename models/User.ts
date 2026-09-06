@@ -15,6 +15,9 @@ export interface IUser extends Document {
   verified: boolean;
   createdAt: Date;
   updatedAt: Date;
+  idCardUrl?: string;
+  idVerificationStatus: 'none' | 'pending' | 'verified' | 'rejected';
+  idVerificationReason?: string;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -30,6 +33,14 @@ const UserSchema = new Schema<IUser>({
   bio: { type: String },
   role: { type: String, enum: ['USER', 'MODERATOR', 'ADMIN'], default: 'USER' },
   verified: { type: Boolean, default: false },
+  idCardUrl: { type: String },
+    idVerificationStatus: {
+      type: String,
+      enum: ['none', 'pending', 'verified', 'rejected'],
+      default: 'none',
+      index: true,
+    },
+    idVerificationReason: { type: String },
 }, { timestamps: true });
 
 export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);

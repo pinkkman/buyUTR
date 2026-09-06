@@ -5,6 +5,7 @@ import dbConnect from '@/lib/db';
 import Conversation from '@/models/Conversation';
 import Listing from '@/models/Listing';
 import Notification from '@/models/Notification';
+import User from '@/models/User';
 
 /**
  * POST /api/conversations
@@ -18,7 +19,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const uid = (session.user as any).id;
-
+    
+const user = await User.findById(uid).select('idVerificationStatus');
+if (user.idVerificationStatus === 'none') {
+  return NextResponse.json({ error: 'Verify your ID first to start chatting' }, { status: 403 });
+}
+if (user.idVerificationStatus === 'rejected') {
+  return NextResponse.json({ error: 'Re-submit your ID to start chatting' }, { status: 403 });
+}
     const body = await req.json();
     const { listingId } = body;
 

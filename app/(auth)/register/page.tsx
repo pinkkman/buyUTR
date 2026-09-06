@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { registerAction } from '@/lib/auth/actions';
+import IdCardUpload from '@/components/IdCardUpload';
 
 export default function RegisterPage() {
   const [state, formAction, pending] = useActionState(registerAction, null);
+const [idCard,setIdCard]= useState<File | null>(null);
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 py-12 bg-background">
@@ -38,11 +40,17 @@ export default function RegisterPage() {
             className="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent-secondary transition disabled:opacity-60">
             {pending ? 'Creating account…' : 'Sign up'}
           </button>
+          <div className="border-t pt-4 mt-4">
+  <p className="text-sm font-medium mb-2">Optional: Upload OUTR ID to get verified now</p>
+  <IdCardUpload onFile={setIdCard} />
+  <p className="text-xs text-slate-500 mt-2">You can skip this and verify later from your profile.</p>
+</div>
         </form>
         <p className="text-center text-sm text-fg-muted">
           Have an account?{' '}
           <Link href="/login" className="text-accent font-medium hover:text-accent-secondary hover:underline">Log in</Link>
         </p>
+        
       </div>
     </div>
   );

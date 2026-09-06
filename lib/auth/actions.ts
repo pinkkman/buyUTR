@@ -45,7 +45,8 @@ export async function registerAction(_prevState: unknown, formData: FormData) {
       ...validated,
       email: validated.email.toLowerCase(),
       passwordHash,
-      verified: isCollegeEmail,
+      verified: false,
+      idVerificationStatus:'none',
     }).save();
 
     await signIn('credentials', {
