@@ -11,17 +11,26 @@ export default function IdVerificationBanner() {
     fetch('/api/verify-id/status').then((r) => r.json()).then(setData).catch(() => {});
   }, []);
 
+  // Don't render if no data, already verified, or dismissed
   if (!data || data.idVerificationStatus === 'verified' || dismissed) return null;
 
-  const config = {
-    none: { icon: ShieldCheck, bg: 'bg-blue-50 border-blue-200', text: 'text-blue-800',
-      msg: 'Verify your OUTR ID to unlock messaging and full access.', btn: 'Verify Now' },
-    pending: { icon: Clock, bg: 'bg-amber-50 border-amber-200', text: 'text-amber-800',
-      msg: 'Your ID is being reviewed. This usually takes a few minutes.', btn: null },
-    rejected: { icon: AlertCircle, bg: 'bg-red-50 border-red-200', text: 'text-red-800',
-      msg: `ID rejected: ${data.idVerificationReason || 'Please re-submit.'}`, btn: 'Re-submit' },
-  }[data.idVerificationStatus];
-  
+  // ✅ FIXED: Use a Record with a fallback so `config` is NEVER undefined
+  const configs: Record<string, any> = {
+    none: {
+      icon: ShieldCheck, bg: 'bg-blue-50 border-blue-200', text: 'text-blue-800',
+      msg: 'Verify your OUTR ID to unlock messaging and full access.', btn: 'Verify Now'
+    },
+    pending: {
+      icon: Clock, bg: 'bg-amber-50 border-amber-200', text: 'text-amber-800',
+      msg: 'Your ID is being reviewed. This usually takes a few minutes.', btn: null
+    },
+    rejected: {
+      icon: AlertCircle, bg: 'bg-red-50 border-red-200', text: 'text-red-800',
+      msg: `ID rejected: ${data.idVerificationReason || 'Please re-submit.'}`, btn: 'Re-submit'
+    },
+  };
+
+  const config = configs[data.idVerificationStatus] || configs.none;
   const Icon = config.icon;
 
   return (
